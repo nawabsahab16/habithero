@@ -54,7 +54,6 @@ export const useTaskStore = create<TaskState>((set, get) => ({
       return { tasks: updatedTasks };
     });
 
-
     const user = useAuthStore.getState().user;
     if (user) {
       const updatedUser = {

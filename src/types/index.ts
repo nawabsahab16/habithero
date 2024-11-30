@@ -4,6 +4,11 @@ export interface User {
   username: string;
   coins: number;
   redeemedRewards: string[];
+  photoUrl?: string;
+  motivation?: string;
+  createdAt: string;
+  lastLogin: string;
+  lastUpdated?: string;
 }
 
 export interface Task {
@@ -15,6 +20,7 @@ export interface Task {
   streak: number;
   lastCompletedAt?: string;
   createdAt: string;
+  lastUpdated?: string;
 }
 
 export interface Reward {
@@ -31,6 +37,7 @@ export interface AuthState {
   login: (email: string, password: string) => void;
   register: (email: string, password: string, username: string) => void;
   logout: () => void;
+  updateProfile: (data: { username: string; photoUrl?: string; motivation?: string }) => void;
 }
 
 export interface TaskState {
@@ -45,4 +52,9 @@ export interface RewardState {
   redeemReward: (rewardId: string) => void;
   canAffordReward: (rewardId: string) => boolean;
   hasRedeemed: (rewardId: string) => boolean;
+}
+
+export interface ThemeState {
+  theme: 'light' | 'dark';
+  toggleTheme: () => void;
 }

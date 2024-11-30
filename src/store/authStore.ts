@@ -13,13 +13,14 @@ export const useAuthStore = create<AuthState>((set) => ({
   isAuthenticated: !!getStoredAuth().user,
 
   login: (email: string, password: string) => {
-    // Simulate authentication
     const user: User = {
       id: 'user-1',
       email,
       username: email.split('@')[0],
       coins: 0,
-      redeemedRewards: []
+      redeemedRewards: [],
+      createdAt: new Date().toISOString(),
+      lastLogin: new Date().toISOString()
     };
     
     localStorage.setItem(STORAGE_KEY, JSON.stringify({ user }));
@@ -27,13 +28,14 @@ export const useAuthStore = create<AuthState>((set) => ({
   },
 
   register: (email: string, password: string, username: string) => {
-    // Simulate registration
     const user: User = {
       id: 'user-' + Date.now(),
       email,
       username,
       coins: 0,
-      redeemedRewards: []
+      redeemedRewards: [],
+      createdAt: new Date().toISOString(),
+      lastLogin: new Date().toISOString()
     };
     
     localStorage.setItem(STORAGE_KEY, JSON.stringify({ user }));
@@ -43,5 +45,20 @@ export const useAuthStore = create<AuthState>((set) => ({
   logout: () => {
     localStorage.removeItem(STORAGE_KEY);
     set({ user: null, isAuthenticated: false });
+  },
+
+  updateProfile: (profileData) => {
+    set((state) => {
+      if (!state.user) return state;
+
+      const updatedUser = {
+        ...state.user,
+        ...profileData,
+        lastUpdated: new Date().toISOString()
+      };
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ user: updatedUser }));
+      return { ...state, user: updatedUser };
+    });
   }
 }));

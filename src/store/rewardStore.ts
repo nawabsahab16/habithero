@@ -75,6 +75,7 @@ const REWARDS: Reward[] = [
   }
 ];
 
+// Rest of the store implementation remains the same
 export const useRewardStore = create<RewardState>((set, get) => ({
   rewards: REWARDS,
   redeemReward: (rewardId: string) => {
