@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import AuthPage from './pages/AuthPage';
 import TasksPage from './pages/TasksPage';
 import RewardsPage from './pages/RewardsPage';
+import LeaderboardPage from './components/leaderboard/LeaderboardPage';
 
 const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
   const isAuthenticated = useAuthStore(state => state.isAuthenticated);
@@ -35,6 +36,11 @@ function App() {
           <Route path="/rewards" element={
             <PrivateRoute>
               <RewardsPage />
+            </PrivateRoute>
+          } />
+          <Route path="/leaderboard" element={
+            <PrivateRoute>
+              <LeaderboardPage />
             </PrivateRoute>
           } />
         </Routes>

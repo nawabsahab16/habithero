@@ -17,7 +17,7 @@ const RewardCard: React.FC<RewardCardProps> = ({ reward }) => {
       <img
         src={reward.image}
         alt={reward.title}
-        className="w-full h-48 object-cover" 
+        className="w-full h-48 object-cover"
       />
       <div className="p-4">
         <h3 className="text-lg font-semibold text-gray-900">{reward.title}</h3>

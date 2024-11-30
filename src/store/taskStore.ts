@@ -54,12 +54,12 @@ export const useTaskStore = create<TaskState>((set, get) => ({
       return { tasks: updatedTasks };
     });
 
-    // Update user coins
+
     const user = useAuthStore.getState().user;
     if (user) {
       const updatedUser = {
         ...user,
-        coins: user.coins + 10 // Award 10 coins for completing a task
+        coins: user.coins + 10
       };
       localStorage.setItem('habitHero_auth', JSON.stringify({ user: updatedUser }));
       useAuthStore.setState({ user: updatedUser });

@@ -5,12 +5,7 @@ const STORAGE_KEY = 'habitHero_auth';
 
 const getStoredAuth = (): { user: User | null } => {
   const stored = localStorage.getItem(STORAGE_KEY);
-  try {
-    return stored ? JSON.parse(stored) : { user: null };
-  } catch (error) {
-    console.error('Error parsing stored auth data:', error);
-    return { user: null };
-  }
+  return stored ? JSON.parse(stored) : { user: null };
 };
 
 export const useAuthStore = create<AuthState>((set) => ({
@@ -18,11 +13,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   isAuthenticated: !!getStoredAuth().user,
 
   login: (email: string, password: string) => {
-    if (!email || !password) {
-      console.error("Email and password are required.");
-      return;
-    }
-
+    // Simulate authentication
     const user: User = {
       id: 'user-1',
       email,
@@ -30,17 +21,13 @@ export const useAuthStore = create<AuthState>((set) => ({
       coins: 0,
       redeemedRewards: []
     };
-
+    
     localStorage.setItem(STORAGE_KEY, JSON.stringify({ user }));
     set({ user, isAuthenticated: true });
   },
 
   register: (email: string, password: string, username: string) => {
-    if (!email || !password || !username) {
-      console.error("All fields are required for registration.");
-      return;
-    }
-    
+    // Simulate registration
     const user: User = {
       id: 'user-' + Date.now(),
       email,
@@ -48,7 +35,7 @@ export const useAuthStore = create<AuthState>((set) => ({
       coins: 0,
       redeemedRewards: []
     };
-
+    
     localStorage.setItem(STORAGE_KEY, JSON.stringify({ user }));
     set({ user, isAuthenticated: true });
   },
